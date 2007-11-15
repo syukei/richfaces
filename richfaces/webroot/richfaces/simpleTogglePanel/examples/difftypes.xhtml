@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+			
+	<h:form>
+		<h:panelGrid columns="3" columnClasses="tpanels" width="100%">
+		
+			<rich:simpleTogglePanel switchType="server" label="Server Switch Type">
+					The regular JSF form submission is processed during the changing mode between
+					showing and hidding the additional content.
+			</rich:simpleTogglePanel>
+			
+			<rich:simpleTogglePanel switchType="ajax" label="Ajax Switch Type">
+					This type allows to perform the partual view update instead of the
+					whole page reloading. You also can point to other areas of the view
+					to be re-rendered while the panel content is toggled.
+			</rich:simpleTogglePanel>
+			
+			<rich:simpleTogglePanel switchType="client" label="Client Switch Type">
+					The switching between showing and hiding the toggle panel content
+					performs on the client side.
+			</rich:simpleTogglePanel>
+							
+		</h:panelGrid>			
+	</h:form>
+					
+</ui:composition>
