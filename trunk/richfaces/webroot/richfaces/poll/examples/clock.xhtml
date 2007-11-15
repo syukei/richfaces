@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j" 
+      xmlns:rich="http://richfaces.org/rich">
+			
+	<rich:separator height="1"/>
+	<a4j:region>
+		<h:form>
+			<a4j:poll id="poll" interval="500" enabled="#{userBean.pollEnabled}" reRender="poll,grid"/>
+		</h:form>
+	</a4j:region>
+	<h:form>
+		<h:panelGrid columns="2" width="80%" id="grid">
+			<h:panelGrid columns="1">
+				<h:outputText value="Polling Inactive" rendered="#{not userBean.pollEnabled}"></h:outputText>
+				<h:outputText value="Polling Active" rendered="#{userBean.pollEnabled}"></h:outputText>
+				<a4j:commandButton style="width:120px" id="control"
+								   value="#{userBean.pollEnabled?'Stop':'Start'} Polling"
+								   reRender="poll, grid">
+					<a4j:actionparam name="polling" value="#{!userBean.pollEnabled}"
+									 assignTo="#{userBean.pollEnabled}"/>
+				</a4j:commandButton>
+			</h:panelGrid>
+				<h:outputText id="serverDate" style="font-size:16px" value="Server Date: #{userBean.date}"/>
+		</h:panelGrid>  
+	</h:form>
+	<rich:separator height="1" style="padding-top:10px"/>
+</ui:composition>

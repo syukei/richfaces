@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+	<style>
+		.tooltip {
+			background-color:#{a4jSkin.generalBackgroundColor};
+			border-width:1px;
+			padding:10px;
+		}
+		.tooltipData {
+			font-weight: bold;
+		}
+	</style>
+																		
+	<h:form>
+	<h:outputText value="This tooltip rendered on server in separate request" id="tt3">
+		<rich:toolTip direction="top-right" mode="ajax" verticalOffset="5" zorder="200" styleClass="tooltip" layout="block">
+			<f:facet name="defaultContent">
+				<strong>Wait...</strong>
+			</f:facet>
+			<span>This tooltip content was <strong>rendered</strong> on server </span>
+			<h:panelGrid columns="2">
+				<h:outputText value="tooltips requested:" />
+				<h:outputText value="#{toolTipData.tooltipCounter}" styleClass="tooltipData" />
+				<h:outputText value="last request:" />
+				<h:outputText value="#{toolTipData.tooltipDate}"  styleClass="tooltipData" >
+					<f:convertDateTime pattern="mm:ss.SSS"/>
+				</h:outputText>
+			</h:panelGrid>
+		</rich:toolTip>
+	</h:outputText>
+	<rich:dataTable value="#{toolTipData.vehicles}" width="400" var="vehicle" rowKeyVar="row">
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="##"/>
+			</f:facet>
+			<h:outputText value="#{row+1}" />
+		</rich:column>
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Make"/>
+			</f:facet>
+			<h:outputText id="make" value="#{vehicle.make}" >
+		<rich:toolTip direction="top-right" mode="ajax" delay="30" styleClass="tooltip" immediate="true" layout="block">
+			<a4j:actionparam name="key" value="#{row}" assignTo="#{toolTipData.currentVehicleIndex}" />
+
+			<h:panelGrid columns="4">
+				<f:facet name="header">
+					<h:outputText value="Vehicle details:" />
+				</f:facet>
+				<h:outputText value="make:" />
+				<h:outputText value="#{vehicle.make}" styleClass="tooltipData" />
+				<h:outputText value="model:" />
+				<h:outputText value="#{vehicle.model}" styleClass="tooltipData" />
+				<h:outputText value="year:" />
+				<h:outputText value="#{vehicle.year}" styleClass="tooltipData" />
+				<h:outputText value="milage:" />
+				<h:outputText value="#{vehicle.milage}" styleClass="tooltipData" />
+				<h:outputText value="zip:" />
+				<h:outputText value="#{vehicle.zip}" styleClass="tooltipData" />
+				<h:outputText value="listed:" />
+				<h:outputText value="#{vehicle.listed}" styleClass="tooltipData" >
+					<f:convertDateTime dateStyle="short"/>
+				</h:outputText>
+				<f:facet name="footer">
+					<h:panelGroup>
+						<h:outputText value="vin: " />
+						<h:outputText value="#{vehicle.vin}" styleClass="tooltipData" />
+					</h:panelGroup>
+				</f:facet>
+				
+			</h:panelGrid>
+		</rich:toolTip>
+			</h:outputText>
+		</rich:column>
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Model"/>
+			</f:facet>
+			<h:outputText value="#{vehicle.model}" />
+		</rich:column>
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Year"/>
+			</f:facet>
+			<h:outputText value="#{vehicle.year}" />
+		</rich:column>
+	</rich:dataTable>
+	</h:form>
+
+
+</ui:composition>

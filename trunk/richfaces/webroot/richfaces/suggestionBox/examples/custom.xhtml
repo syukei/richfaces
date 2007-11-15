@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+
+	<h:form id="suggestionbox_form">
+
+		<h:outputText
+			value="Simple richfaces Suggestion Box test web application."
+			style="font: 18px;font-weight: bold;" />
+		<br />
+		<br />
+
+		<h:panelGrid columns="3" border="0" style="border: 1px solid black;">
+			<f:verbatim>Suggestion Box will suggest you  town names if it's started with the "a" or
+       "A" letter</f:verbatim>
+
+			<f:facet name="header">
+				<f:verbatim>Input With Suggestion Feature</f:verbatim>
+			</f:facet>
+
+
+			<f:verbatim>&#160;</f:verbatim>
+
+			<h:inputText value="#{suggestionBox.property}" id="text" />
+			<rich:suggestionbox id="suggestionBoxId" for="text" tokens=",["
+				rules="#{suggestionBox.rules}"
+				suggestionAction="#{suggestionBox.autocomplete}" var="result"
+				fetchValue="#{result.text}" rows="#{suggestionBox.intRows}"
+				first="#{suggestionBox.intFirst}"
+				minChars="#{suggestionBox.minchars}"
+				shadowOpacity="#{suggestionBox.shadowOpacity}"
+				border="#{suggestionBox.border}" width="#{suggestionBox.width}"
+				height="#{suggestionBox.height}"
+				shadowDepth="#{suggestionBox.shadowDepth}"
+				cellpadding="#{suggestionBox.cellpadding}">
+				<h:column>
+					<h:outputText value="#{result.text}" />
+				</h:column>
+			</rich:suggestionbox>
+		</h:panelGrid>
+
+		<br />
+		<br />
+
+		<h:panelGrid columns="2" border="0" style="border: 1px solid black;">
+
+			<h:outputText value="Border" />
+
+			<rich:inputNumberSlider minValue="1" maxValue="5"
+				value="#{suggestionBox.border}">
+				<a4j:support event="onchange" reRender="suggestionBoxId" />
+			</rich:inputNumberSlider>
+
+			<h:outputText value="Width" />
+
+			<rich:inputNumberSlider minValue="150" maxValue="350" step="50"
+				value="#{suggestionBox.width}">
+				<a4j:support event="onchange" reRender="suggestionBoxId" />
+			</rich:inputNumberSlider>
+
+
+			<h:outputText value="Height" />
+
+			<rich:inputNumberSlider minValue="100" maxValue="300" step="50"
+				value="#{suggestionBox.height}">
+				<a4j:support event="onchange" reRender="suggestionBoxId" />
+			</rich:inputNumberSlider>
+
+			<h:outputText value="Shadow Depth" />
+
+			<rich:inputNumberSlider minValue="3" maxValue="6"
+				value="#{suggestionBox.shadowDepth}">
+				<a4j:support event="onchange" reRender="suggestionBoxId" />
+			</rich:inputNumberSlider>
+
+
+			<h:outputText value="Shadow Opacity" />
+
+			<rich:inputNumberSlider minValue="1" maxValue="9"
+				value="#{suggestionBox.shadowOpacity}">
+				<a4j:support event="onchange" reRender="suggestionBoxId" />
+			</rich:inputNumberSlider>
+
+			<h:outputText value="Cellpadding" />
+
+			<rich:inputNumberSlider minValue="1" maxValue="20"
+				value="#{suggestionBox.cellpadding}">
+				<a4j:support event="onchange" reRender="suggestionBoxId" />
+			</rich:inputNumberSlider>
+
+
+		</h:panelGrid>
+	</h:form>
+
+</ui:composition>
